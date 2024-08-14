@@ -1,0 +1,111 @@
+body {
+    background-image: url('background.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #bb86fc;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #bb86fc;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #bb86fc;
+    text-shadow: 2px 2px #ff00ff;
+    letter-spacing: 1px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.component-selector {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #bb86fc;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 5px 5px 20px #ff00ff;
+}
+
+.component-block {
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    font-size: 18px;
+    color: #ff00ff;
+    text-transform: uppercase;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #bb86fc;
+    color: #000;
+    border: none;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+select {
+    background-color: #000000;
+    color: #bb86fc;
+    border: 2px solid #bb86fc;
+}
+
+button:hover {
+    background-color: #ff00ff;
+    color: #000;
+}
+
+.component-img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #bb86fc;
+    margin-top: 10px;
+}
+
+.compatibility-check {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 20px;
+    margin: 20px 10px 0;
+    border: 2px solid #bb86fc;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 5px 5px 20px #ff00ff;
+}
+
+.compatibility-result {
+    background-color: #121212;
+    color: #bb86fc;
+    padding: 10px;
+    border: 2px solid #bb86fc;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.result-gif {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px auto;
+}

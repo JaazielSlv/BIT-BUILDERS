@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT-BUILDERS</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #bb86fc;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #bb86fc;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #bb86fc;
+            text-shadow: 2px 2px #ff00ff;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .component-selector, .compatibility-check {
+            background-color: #1e1e1e;
+            padding: 20px;
+            margin: 10px;
+            border: 2px solid #bb86fc;
+            width: 45%;
+            box-shadow: 5px 5px 20px #ff00ff;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #ff00ff;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #bb86fc;
+            color: #000;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        select {
+            background-color: #000000;
+            color: #bb86fc;
+            border: 2px solid #bb86fc;
+        }
+
+        button:hover {
+            background-color: #ff00ff;
+            color: #000;
+        }
+
+        .compatibility-result {
+            background-color: #121212;
+            color: #bb86fc;
+            padding: 10px;
+            border: 2px solid #bb86fc;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>BIT-BUILDERS</h1>
+    </header>
+
+    <div class="container">
+        <!-- Seção de Seleção de Componentes -->
+        <div class="component-selector">
+            <h2>Selecione seus Componentes</h2>
+            <label for="motherboard">Placa-Mãe:</label>
+            <select id="motherboard">
+                <option value="asus-prime">ASUS Prime Z590</option>
+                <option value="msi-mag">MSI MAG B550</option>
+                <option value="gigabyte-aorus">Gigabyte Aorus X570</option>
+            </select>
+
+            <label for="cpu">Processador:</label>
+            <select id="cpu">
+                <option value="intel-i9">Intel Core i9 11900K</option>
+                <option value="amd-ryzen-9">AMD Ryzen 9 5900X</option>
+                <option value="intel-i7">Intel Core i7 10700K</option>
+            </select>
+
+            <label for="gpu">Placa de Vídeo:</label>
+            <select id="gpu">
+                <option value="nvidia-rtx-3080">NVIDIA RTX 3080</option>
+                <option value="amd-radeon-6800">AMD Radeon RX 6800</option>
+                <option value="nvidia-rtx-3070">NVIDIA RTX 3070</option>
+            </select>
+
+            <label for="ram">Memória RAM:</label>
+            <select id="ram">
+                <option value="corsair-16gb">Corsair Vengeance 16GB</option>
+                <option value="gskill-32gb">G.Skill Trident Z 32GB</option>
+                <option value="kingston-16gb">Kingston HyperX 16GB</option>
+            </select>
+
+            <button onclick="checkCompatibility()">Verificar Compatibilidade</button>
+        </div>
+
+        <!-- Seção de Verificação de Compatibilidade -->
+        <div class="compatibility-check">
+            <h2>Verificação de Compatibilidade</h2>
+            <div id="compatibility-result" class="compatibility-result">
+                Escolha seus componentes e clique no botão para verificar a compatibilidade.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkCompatibility() {
+            const motherboard = document.getElementById('motherboard').value;
+            const cpu = document.getElementById('cpu').value;
+            const gpu = document.getElementById('gpu').value;
+            const ram = document.getElementById('ram').value;
+
+            // Simulação de verificação de compatibilidade
+            if (motherboard === 'asus-prime' && cpu === 'intel-i9' && gpu === 'nvidia-rtx-3080') {
+                document.getElementById('compatibility-result').innerText = 'Tudo compatível! Pronto para montar.';
+            } else {
+                document.getElementById('compatibility-result').innerText = 'Algumas peças podem não ser compatíveis.';
+            }
+        }
+    </script>
+</body>
+</html>

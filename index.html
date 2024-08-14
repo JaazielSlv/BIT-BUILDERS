@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT-BUILDERS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>BIT-BUILDERS</h1>
+    </header>
+    <div class="container">
+        <div class="component-selector">
+            <h2>Selecionar Componentes</h2>
+            
+            <div class="component-block">
+                <h3>Placa-Mãe</h3>
+                <select id="motherboard" onchange="updateImage('motherboard')">
+                    <option value="">Selecione uma Placa-Mãe</option>
+                    <option value="asus-prime" data-img="asus-prime.png">ASUS Prime Z590</option>
+                    <option value="msi-mag" data-img="msi-mag.png">MSI MAG B550</option>
+                </select>
+                <img id="motherboard-img" src="" alt="Placa-Mãe" class="component-img" style="display:none;">
+            </div>
+            
+            <div class="component-block">
+                <h3>Processador</h3>
+                <select id="cpu" onchange="updateImage('cpu')">
+                    <option value="">Selecione um Processador</option>
+                    <option value="intel-i9" data-img="intel-i9.jpg">Intel Core i9</option>
+                    <option value="amd-ryzen-9" data-img="amd-ryzen-9.jpg">AMD Ryzen 9 5900X</option>
+                </select>
+                <img id="cpu-img" src="" alt="Processador" class="component-img" style="display:none;">
+            </div>
+            
+            <div class="component-block">
+                <h3>Placa de Vídeo</h3>
+                <select id="gpu" onchange="updateImage('gpu')">
+                    <option value="">Selecione uma Placa de Vídeo</option>
+                    <option value="nvidia-rtx-3080" data-img="nvidia-rtx-3080.jpg">NVIDIA RTX 3080</option>
+                    <option value="amd-radeon-6800" data-img="amd-radeon-6800.jpg">AMD Radeon RX 6800</option>
+                </select>
+                <img id="gpu-img" src="" alt="Placa de Vídeo" class="component-img" style="display:none;">
+            </div>
+            
+            <div class="component-block">
+                <h3>Memória RAM</h3>
+                <select id="ram" onchange="updateImage('ram')">
+                    <option value="">Selecione uma Memória RAM</option>
+                    <option value="corsair-16gb" data-img="corsair-16gb.jpg">Corsair Vengeance 16GB</option>
+                    <option value="gskill-32gb" data-img="gskill-32gb.jpg">G.Skill Trident Z 32GB</option>
+                </select>
+                <img id="ram-img" src="" alt="Memória RAM" class="component-img" style="display:none;">
+            </div>
+            
+            <button onclick="checkCompatibility()">Verificar Compatibilidade</button>
+        </div>
+        
+        <div class="compatibility-check">
+            <h2>Resultado da Verificação</h2>
+            <div id="compatibility-result" class="compatibility-result"></div>
+            <div id="gear-animation" class="gear-animation">
+                <img id="success-gif" src="success.gif" alt="Sucesso" class="result-gif" style="display: none;">
+                <img id="failure-gif" src="failure.gif" alt="Falha" class="result-gif" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
