@@ -115,3 +115,20 @@ button:hover {
     display: block;
     margin: 20px auto;
 }
+
+.spec-sheet-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #ff00ff;
+    color: #000;
+    padding: 10px;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    border: 2px solid #bb86fc;
+}
+
+.spec-sheet-link:hover {
+    background-color: #bb86fc;
+    color: #000;
+}
