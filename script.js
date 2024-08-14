@@ -2,12 +2,16 @@ function updateImage(component) {
     const selectElement = document.getElementById(component);
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     const imgElement = document.getElementById(`${component}-img`);
+    const linkElement = document.getElementById(`${component}-link`);
 
     if (selectedOption.value) {
         imgElement.src = selectedOption.getAttribute('data-img');
         imgElement.style.display = 'block';
+        linkElement.href = selectedOption.getAttribute('data-url');
+        linkElement.style.display = 'block';
     } else {
         imgElement.style.display = 'none';
+        linkElement.style.display = 'none';
     }
 }
 
@@ -42,5 +46,5 @@ function checkCompatibility() {
         } else {
             failureGif.style.display = 'block';
         }
-    }, 3000);
+    }, 2000);
 }
