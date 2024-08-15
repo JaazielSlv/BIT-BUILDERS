@@ -95,12 +95,12 @@ header h1 {
 
     .carousel {
         max-width: 100%; 
-        height: auto;
+        height: auto; /* Permite que a altura da imagem se ajuste automaticamente */
     }
 
     .carousel-image {
-        width: 100%;
-        height: auto;
+        width: 100%; /* Garante que a largura seja 100% do contêiner */
+        height: auto; /* Ajusta a altura automaticamente */
     }
 
     .container {
