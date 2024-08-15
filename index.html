@@ -14,35 +14,40 @@
     <div class="container">
         <div class="component-selector">
             <h2>Selecionar Componentes</h2>
-            
-            <div class="component-block">
-                <h3>Placa-Mãe</h3>
-                <select id="motherboard" onchange="updateImage('motherboard')">
-                    <option value="">Selecione uma Placa-Mãe</option>
-                    <option value="asus-prime" data-img="asus-prime.png" data-url="placamae/asus-prime/index.html">ASUS Prime Z590</option>
-                    <option value="msi-mag" data-img="msi-mag.png" data-url="/placamae/msi-mag/index.html">MSI MAG B550</option>
-                </select>
-                <img id="motherboard-img" src="" alt="Placa-Mãe" class="component-img" style="display:none;">
-                <a id="motherboard-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
-            </div>
-            
+
             <div class="component-block">
                 <h3>Processador</h3>
                 <select id="cpu" onchange="updateImage('cpu')">
                     <option value="">Selecione um Processador</option>
-                    <option value="intel-i9" data-img="intel-i9.png" data-url="/processadores/intel-i9/index.html">Intel Core i9</option>
-                    <option value="amd-ryzen-9" data-img="amd-ryzen-9.jpg" data-url="/processadores/amd-ryzen-9/index.html">AMD Ryzen 9 5900X</option>
+                    <option value="Intel Core i5-10400F" data-img="i5-10400F.png" data-url="processadores/i5-10400F/index.html">Intel Core i5-10400F</option>
+                    <option value="Intel Core i7-12700K" data-img="i7-12700K.png" data-url="processadores/i7-12700K/index.html">Intel Core i7-12700K</option>
+                    <option value="AMD Ryzen 5 3600" data-img="Ryzen5-3600.jpg" data-url="processadores/Ryzen5-3600/index.html">AMD Ryzen 5 3600</option>
+                    <option value="AMD Ryzen 7 5800X" data-img="Ryzen7-5800X.jpg" data-url="processadores/Ryzen7-5800X/index.html">AMD Ryzen 5 3600X</option>
                 </select>
                 <img id="cpu-img" src="" alt="Processador" class="component-img" style="display:none;">
                 <a id="cpu-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
+            </div>            
+
+            <div class="component-block">
+                <h3>Placa-Mãe</h3>
+                <select id="motherboard" onchange="updateImage('motherboard')">
+                    <option value="">Selecione uma Placa-Mãe</option>
+                    <option value="MSI MAG B460M Mortar" data-img="MSI-MAG-B460M-Mortar.png" data-url="placamae/MSI MAG B460M Mortar/index.html">MSI MAG B460M Mortar</option>
+                    <option value="ASUS TUF Gaming B450M-PLUS II" data-img="ASUS-TUF-Gaming-B450M-PLUS-II.png" data-url="placamae/ASUS TUF Gaming B450M-PLUS II/index.html">ASUS TUF Gaming B450M-PLUS II</option>
+                    <option value="ASUS ROG Strix Z690-E" data-img="ASUS-ROG-Strix-Z690-E.png" data-url="placamae/ASUS ROG Strix Z690-E/index.html">ASUS ROG Strix Z690-E</option>
+                </select>
+                <img id="motherboard-img" src="" alt="Placa-Mãe" class="component-img" style="display:none;">
+                <a id="motherboard-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
             </div>
-            
+                       
             <div class="component-block">
                 <h3>Placa de Vídeo</h3>
                 <select id="gpu" onchange="updateImage('gpu')">
                     <option value="">Selecione uma Placa de Vídeo</option>
-                    <option value="nvidia-rtx-3080" data-img="nvidia-rtx-3080.jpg" data-url="/gpu/nvidia-rtx-3080/index.html">NVIDIA RTX 3080</option>
-                    <option value="amd-radeon-6800" data-img="amd-radeon-6800.jpg" data-url="/gpu/amd-radeon-6800/index.html">AMD Radeon RX 6800</option>
+                    <option value="NVIDIA GeForce GTX 1660 Super" data-img="NVIDIA-GeForce-GTX-1660-Super.jpg" data-url="gpu/NVIDIA GeForce GTX 1660 Super/index.html">NVIDIA GeForce GTX 1660 Super</option>
+                    <option value="NVIDIA GeForce RTX 3060 Ti" data-img="NVIDIA-GeForce-RTX 3060-Ti.jpg" data-url="gpu/NVIDIA GeForce RTX 3060 Ti/index.html">NVIDIA GeForce RTX 3060 Ti</option>
+                    <option value="AMD Radeon RX 6700 XT" data-img="AMD-Radeon-RX-6700-XT.jpg" data-url="gpu/AMD Radeon RX 6700 XT/index.html">AMD Radeon RX 6700 XT</option>
+                    <option value="AMD Radeon RX 6900 XT" data-img="AMD-Radeon-RX-6900-XT.jpg" data-url="gpu/AMD Radeon RX 6900 XT/index.html">AMD Radeon RX 6900 XT</option>
                 </select>
                 <img id="gpu-img" src="" alt="Placa de Vídeo" class="component-img" style="display:none;">
                 <a id="gpu-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
@@ -52,8 +57,10 @@
                 <h3>Memória RAM</h3>
                 <select id="ram" onchange="updateImage('ram')">
                     <option value="">Selecione uma Memória RAM</option>
-                    <option value="corsair-16gb" data-img="corsair-16gb.jpg" data-url="/ram/corsair-16gb/index.html">Corsair Vengeance 16GB</option>
-                    <option value="gskill-32gb" data-img="gskill-32gb.jpg" data-url="/ram/gskill-32gb/index.html">G.Skill Trident Z 32GB</option>
+                    <option value="Corsair Vengeance 8GB DDR3 1600MHz" data-img="Corsair-Vengeance-8GB-DDR3-1600MHz.jpg" data-url="ram/Corsair Vengeance 8GB DDR3 1600MHz/index.html">Corsair Vengeance 8GB DDR3 1600MHz</option>
+                    <option value="G.Skill Ripjaws V 16GB DDR4 3200MHz" data-img="G.Skill-Ripjaws-V-16GB-DDR4-3200MHz.jpg" data-url="ram/G.Skill Ripjaws V 16GB DDR4 3200MHz/index.html">G.Skill Ripjaws V 16GB DDR4 3200MHz</option>
+                    <option value="Corsair Vengeance LPX 32GB DDR4 3600MHz" data-img="Corsair-Vengeance-LPX-32GB-DDR4-3600MHz.jpg" data-url="ram/Corsair Vengeance LPX 32GB DDR4 3600MHz/index.html">Corsair Vengeance LPX 32GB DDR4 3600MHz</option>
+                    <option value="Kingston Fury Beast 32GB DDR5 5200MHz" data-img="Kingston-Fury-Beast-32GB-DDR5-5200MHz.jpg" data-url="ram/G.Skill Ripjaws V 16GB DDR4 3200MHz/index.html">Kingston Fury Beast 32GB DDR5 5200MHz</option>
                 </select>
                 <img id="ram-img" src="" alt="Memória RAM" class="component-img" style="display:none;">
                 <a id="ram-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
