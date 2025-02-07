@@ -33,7 +33,7 @@ header h1 {
     text-shadow: 3px 3px 0px #663399;
 }
 
-/* Centraliza a frase "Selecionar Componentes" como título abaixo do nome do site */
+
 h2 {
     font-size: 22px;
     margin-bottom: 30px;
@@ -43,13 +43,13 @@ h2 {
     text-align: center;
 }
 
-/* Organizando as caixas de escolha em uma única linha com 4 colunas */
+
 .component-selector {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
-    flex-wrap: nowrap; /* Impede que as caixas quebrem para a linha de baixo */
+    flex-wrap: nowrap; 
     max-width: 1200px;
 }
 
@@ -90,7 +90,7 @@ h2 {
     border: 2px solid #bb86fc;
 }
 
-/* Personalizando o botão de Verificar Compatibilidade */
+
 select {
     background-color: #000000;
     color: #bb86fc;
@@ -120,7 +120,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Centralizando o contêiner de verificação */
+
 .compatibility-check {
     background-color: rgba(30, 30, 30, 0.9);
     padding: 20px;
@@ -142,7 +142,7 @@ button:hover {
     font-family: 'Press Start 2P', cursive;
     border: 2px solid #bb86fc;
 }
-/* Estilizando o resultado da verificação */
+
 .compatibility-result {
     background-color: #121212;
     color: #bb86fc;
