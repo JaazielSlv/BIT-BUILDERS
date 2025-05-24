@@ -32,7 +32,7 @@ O principal objetivo do BIT-BUILDERS é fornecer uma ferramenta intuitiva para:
 
 * **HTML (39.6%)**: Para a estruturação semântica do conteúdo web.
 * **CSS (46.6%)**: Para a estilização e design visual da interface.
-* **JavaScript (13.8%)**: Para a interatividade, lógica de seleção de componentes e manipulação dinâmica da página.
+* **JavaScript (13.8%)**: EM DESENVOLVIMENTO.
 
 ## 📂 Estrutura do Projeto
 
