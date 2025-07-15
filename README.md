@@ -30,9 +30,9 @@ O principal objetivo do BIT-BUILDERS é fornecer uma ferramenta intuitiva para:
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **HTML (39.6%)**: Para a estruturação semântica do conteúdo web.
-* **CSS (46.6%)**: Para a estilização e design visual da interface.
-* **JavaScript (13.8%)**: EM DESENVOLVIMENTO.
+* **HTML (79.4%)**: Para a estruturação semântica do conteúdo web.
+* **CSS (14.1%)**: Para a estilização e design visual da interface.
+* **JavaScript (6.5%)**: EM DESENVOLVIMENTO.
 
 ## 📂 Estrutura do Projeto
 
