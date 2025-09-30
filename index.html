@@ -1,90 +1,74 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIT-BUILDERS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIT-BUILDERS</title>
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <header>
-        <h1>BIT-BUILDERS</h1>
-    </header>
-    <header>
-        <h2>Selecionar Componentes</h2>
-    </header>
-    <div class="container">
-        <div class="component-selector">
+  <header>
+    <h1>BIT-BUILDERS</h1>
+    <h2>Selecionar Componentes</h2>
+  </header>
 
-            <div class="component-block">
-                <h3>Processador</h3>
-                <select id="cpu" onchange="updateImage('cpu')">
-                    <option value="">Selecione um Processador</option>
-                    <option value="intel-i5" data-img="img/i5-10400F.png" data-url="db/processadores/i5-10400F/index.html">Intel Core i5-10400F</option>
-                    <option value="intel-i7" data-img="img/i7-12700K.png" data-url="db/processadores/i7-12700K/index.html">Intel Core i7-12700K</option>
-                    <option value="ryzen-5" data-img="img/Ryzen5-3600.png" data-url="db/processadores/Ryzen5-3600/index.html">AMD Ryzen 5 3600</option>
-                    <option value="intel-i9" data-img="img/Ryzen7-5800X.png" data-url="db/processadores/Ryzen7-5800X/index.html">AMD Ryzen 7 5800X</option>
-                </select>
-                <img id="cpu-img" src="" alt="Processador" class="component-img" style="display:none;">
-                <a id="cpu-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
-            </div>
+  <main class="container">
+    <section class="grid-4">
+      <div class="componente">
+        <h3>Processador</h3>
+        <select id="cpu">
+          <option value="">Selecione</option>
+          <option value="i5-10400F">Intel Core i5-10400F</option>
+          <option value="i7-12700K">Intel Core i7-12700K</option>
+        </select>
+        <img id="cpu-img" src="./img/placeholder.png" alt="Imagem do processador">
+        <a href="./docs/cpu.pdf" target="_blank" class="ficha">Ficha Técnica</a>
+      </div>
 
-            <div class="component-block">
-                <h3>Placa-Mãe</h3>
-                <select id="motherboard" onchange="updateImage('motherboard')">
-                    <option value="">Selecione uma Placa-Mãe</option>
-                    <option value="msi-b460m" data-img="img/MSI-MAG-B460M-Mortar.png" data-url="db/placamae/MSI MAG B460M Mortar/index.html">MSI MAG B460M Mortar</option>
-                    <option value="asus-b450m" data-img="img/ASUS-TUF-Gaming-B450M-PLUS-II.png" data-url="db/placamae/ASUS TUF Gaming B450M-PLUS II/index.html">ASUS TUF Gaming B450M-PLUS II</option>
-                    <option value="asus-prime" data-img="img/ASUS-ROG-Strix-Z690-E.png" data-url="db/placamae/ASUS ROG Strix Z690-E/index.html">ASUS ROG Strix Z690-E</option>
-                </select>
-                <img id="motherboard-img" src="" alt="Placa-Mãe" class="component-img" style="display:none;">
-                <a id="motherboard-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
-            </div>
+      <div class="componente">
+        <h3>Placa-Mãe</h3>
+        <select id="mobo">
+          <option value="">Selecione</option>
+          <option value="b450">B450</option>
+          <option value="z690">Z690</option>
+        </select>
+        <img id="mobo-img" src="./img/placeholder.png" alt="Imagem da placa-mãe">
+        <a href="./docs/mobo.pdf" target="_blank" class="ficha">Ficha Técnica</a>
+      </div>
 
-            <div class="component-block">
-                <h3>Placa de Vídeo</h3>
-                <select id="gpu" onchange="updateImage('gpu')">
-                    <option value="">Selecione uma Placa de Vídeo</option>
-                    <option value="gtx-1660" data-img="img/NVIDIA-GeForce-GTX-1660-Super.png" data-url="db/gpu/NVIDIA GeForce GTX 1660 Super/index.html">NVIDIA GeForce GTX 1660 Super</option>
-                    <option value="rtx-3060" data-img="img/NVIDIA-GeForce-RTX 3060-Ti.png" data-url="db/gpu/NVIDIA GeForce RTX 3060 Ti/index.html">NVIDIA GeForce RTX 3060 Ti</option>
-                    <option value="rx-6700" data-img="img/AMD-Radeon-RX-6700-XT.png" data-url="db/gpu/AMD Radeon RX 6700 XT/index.html">AMD Radeon RX 6700 XT</option>
-                    <option value="nvidia-rtx-3080" data-img="img/AMD-Radeon-RX-6900-XT.png" data-url="db/gpu/AMD Radeon RX 6900 XT/index.html">AMD Radeon RX 6900 XT</option>
-                </select>
-                <img id="gpu-img" src="" alt="Placa de Vídeo" class="component-img" style="display:none;">
-                <a id="gpu-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
-            </div>
+      <div class="componente">
+        <h3>Placa de Vídeo</h3>
+        <select id="gpu">
+          <option value="">Selecione</option>
+          <option value="gtx1660">GTX 1660</option>
+          <option value="rtx3060">RTX 3060</option>
+        </select>
+        <img id="gpu-img" src="./img/placeholder.png" alt="Imagem da placa de vídeo">
+        <a href="./docs/gpu.pdf" target="_blank" class="ficha">Ficha Técnica</a>
+      </div>
 
-            <div class="component-block">
-                <h3>Memória RAM</h3>
-                <select id="ram" onchange="updateImage('ram')">
-                    <option value="">Selecione uma Memória RAM</option>
-                    <option value="corsair-8gb" data-img="img/Corsair-Vengeance-8GB-DDR3-1600MHz.png" data-url="db/ram/Corsair Vengeance 8GB DDR3 1600MHz/index.html">Corsair Vengeance 8GB DDR3 1600MHz</option>
-                    <option value="gskill-16gb" data-img="img/G.Skill-Ripjaws-V-16GB-DDR4-3200MHz.png" data-url="db/ram/G.Skill Ripjaws V 16GB DDR4 3200MHz/index.html">G.Skill Ripjaws V 16GB DDR4 3200MHz</option>
-                    <option value="gskill-32gb" data-img="img/Corsair-Vengeance-LPX-32GB-DDR4-3600MHz.png" data-url="db/ram/Corsair Vengeance LPX 32GB DDR4 3600MHz/index.html">Corsair Vengeance LPX 32GB DDR4 3600MHz</option>
-                    <option value="kingston-32gb" data-img="img/Kingston-Fury-Beast-32GB-DDR5-5200MHz.png" data-url="db/ram/Kingston Fury Beast 32GB DDR5 5200MHz/index.html">Kingston Fury Beast 32GB DDR5 5200MHz</option>
-                </select>
-                <img id="ram-img" src="" alt="Memória RAM" class="component-img" style="display:none;">
-                <a id="ram-link" href="" class="spec-sheet-link" target="_blank" style="display:none;">Ficha Técnica</a>
-            </div>
+      <div class="componente">
+        <h3>Memória RAM</h3>
+        <select id="ram">
+          <option value="">Selecione</option>
+          <option value="ddr4">DDR4</option>
+          <option value="ddr5">DDR5</option>
+        </select>
+        <img id="ram-img" src="./img/placeholder.png" alt="Imagem da memória RAM">
+        <a href="./docs/ram.pdf" target="_blank" class="ficha">Ficha Técnica</a>
+      </div>
+    </section>
 
-        </div>
-
-        <div class="compatibility-check">
-            <button class="botaooo" onclick="checkCompatibility()">Verificar Compatibilidade</button>
-            <h2>Resultado da Verificação</h2>
-            <div id="compatibility-result" class="compatibility-result" role="status" aria-live="polite"></div>
-            <div id="gear-animation" class="gear-animation">
-                <img id="loading-gif" src="img/loading-gear.gif" alt="Carregando" class="result-gif" style="display: none;">
-                <img id="success-gif" src="img/success.gif" alt="Sucesso" class="result-gif" style="display: none;">
-                <img id="failure-gif" src="img/failure.gif" alt="Falha" class="result-gif" style="display: none;">
-            </div>
-        </div>
+    <div class="verificacao">
+      <button id="verificarBtn">Verificar Compatibilidade</button>
+      <div id="status">
+        <img id="loading" src="./img/loading.gif" alt="Verificando..." style="display:none;">
+        <img id="success" src="./img/sucesso.png" alt="Compatível" style="display:none;">
+        <img id="fail" src="./img/falha.png" alt="Incompatível" style="display:none;">
+      </div>
     </div>
-    <script src="/src/script.js"></script>
+  </main>
+
+  <script src="./src/script.js" defer></script>
 </body>
 </html>
-
-
-
