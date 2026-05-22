@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark | BIT-BUILDERS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/benchmark/styles.css">
+</head>
+<body class="benchmark-page">
+    <a href="index.html" class="admin-link">Voltar para o PC Builder</a>
+
+    <main class="benchmark-shell">
+        <section class="benchmark-hero">
+            <p class="eyebrow">BIT-BUILDERS // ESTIMADOR DE FPS</p>
+            <h1>Montagem Validada</h1>
+            <p id="benchmark-subtitle" class="subtitle">Aguardando os dados da montagem selecionada.</p>
+        </section>
+
+        <section class="benchmark-grid">
+            <article class="benchmark-card benchmark-summary">
+                <div class="card-header">
+                    <h2>Resumo da Montagem</h2>
+                    <span id="benchmark-status" class="status-badge">carregando</span>
+                </div>
+                <div id="benchmark-summary-list" class="details-list"></div>
+            </article>
+
+            <article class="benchmark-card benchmark-estimator">
+                <div class="card-header">
+                    <h2>Estimador de FPS</h2>
+                    <span class="status-badge">ativo</span>
+                </div>
+
+                <label>Resolução
+                    <select id="resSelect">
+                        <option value="1080">Full HD (1920×1080)</option>
+                        <option value="1440">QHD (2560×1440)</option>
+                        <option value="2160">4K (3840×2160)</option>
+                    </select>
+                </label>
+
+                <label>Jogo
+                    <select id="gameSelect">
+                        <option value="csgo">CS:GO — competitivo</option>
+                        <option value="cs2">Counter-Strike 2</option>
+                        <option value="valorant">Valorant</option>
+                        <option value="fortnite">Fortnite</option>
+                        <option value="warzone">Call of Duty: Warzone</option>
+                        <option value="gta5">GTA V</option>
+                        <option value="forza5">Forza Horizon 5</option>
+                        <option value="rdr2">Red Dead Redemption 2</option>
+                        <option value="sottr">Shadow of the Tomb Raider</option>
+                        <option value="cyberpunk">Cyberpunk 2077</option>
+                    </select>
+                </label>
+
+                <button id="calcBtn">Atualizar estimativa</button>
+
+                <div id="output" class="benchmark-result" hidden></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="./src/benchmark/page.js?v=20260522c"></script>
+</body>
+</html>

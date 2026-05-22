@@ -1,0 +1,135 @@
+PROCESSADORES
+Intel Core i3-10105F -
+Intel Core i5-10400F
+Intel Core i5-11400F
+Intel Core i5-12400F
+Intel Core i5-13400F
+Intel Core i5-14600K
+Intel Core i7-10700K
+Intel Core i7-11700K
+Intel Core i7-12700K
+Intel Core i7-13700K
+Intel Core i9-10900K
+Intel Core i9-11900K
+Intel Core i9-12900K
+Intel Core i9-13900K
+Intel Core i9-14900K
+AMD Ryzen 5 3600
+AMD Ryzen 5 5600
+AMD Ryzen 5 5600X
+AMD Ryzen 5 7600
+AMD Ryzen 5 7600X
+AMD Ryzen 7 5700X
+AMD Ryzen 7 5800X
+AMD Ryzen 7 7700X
+AMD Ryzen 7 7800X3D
+AMD Ryzen 9 5900X
+AMD Ryzen 9 5950X
+AMD Ryzen 9 7900X
+AMD Ryzen 9 7950X
+
+PLACAS MAE
+ASUS TUF Gaming B450M-PLUS II
+ASUS TUF Gaming B760-PLUS
+ASUS PRIME X670-P
+ASUS ROG Strix Z690-E
+MSI B550 Tomahawk
+Gigabyte B550 AORUS PRO AC
+MSI MPG X570 Gaming Plus
+ASRock B550 Steel Legend
+ASUS PRIME B550M-A
+ASUS ROG Strix B650E-F
+Gigabyte B650 AORUS Elite AX
+MSI MAG B650 Tomahawk
+ASRock B650E PG Riptide
+MSI MPG X670E Carbon WiFi
+MSI MAG B460M Mortar
+Gigabyte B560M DS3H
+ASUS PRIME Z590-P
+MSI Z590-A
+
+GPUS
+NVIDIA GeForce GTX 1650
+NVIDIA GeForce GTX 1660
+NVIDIA GeForce GTX 1660 Super
+NVIDIA GeForce RTX 2060
+NVIDIA GeForce RTX 2060 Super
+NVIDIA GeForce RTX 2070 Super
+NVIDIA GeForce RTX 3060
+NVIDIA GeForce RTX 3060 Ti
+NVIDIA GeForce RTX 3070
+NVIDIA GeForce RTX 3070 Ti
+NVIDIA GeForce RTX 3080
+NVIDIA GeForce RTX 3080 Ti
+NVIDIA GeForce RTX 3090
+NVIDIA GeForce RTX 4060
+NVIDIA GeForce RTX 4060 Ti
+NVIDIA GeForce RTX 4070
+NVIDIA GeForce RTX 4070 Ti
+NVIDIA GeForce RTX 4080
+NVIDIA GeForce RTX 4090
+AMD Radeon RX 6600
+AMD Radeon RX 6600 XT
+AMD Radeon RX 6650 XT
+AMD Radeon RX 6700 XT
+AMD Radeon RX 6750 XT
+AMD Radeon RX 6800
+AMD Radeon RX 6800 XT
+AMD Radeon RX 6900 XT
+AMD Radeon RX 6950 XT
+AMD Radeon RX 7700 XT
+AMD Radeon RX 7800 XT
+AMD Radeon RX 7900 XT
+AMD Radeon RX 7900 XTX
+
+MEMORIAS RAM
+Corsair Vengeance 8GB DDR3 1600MHz
+Kingston HyperX Fury 8GB DDR3 1866MHz
+Crucial Ballistix 16GB DDR4 2666MHz
+Corsair Vengeance LPX 16GB DDR4 3000MHz
+G.Skill Ripjaws V 16GB DDR4 3200MHz
+Kingston Fury Beast 16GB DDR4 3200MHz
+Corsair Vengeance LPX 32GB DDR4 3200MHz
+Corsair Vengeance LPX 32GB DDR4 3600MHz
+G.Skill Trident Z Neo 32GB DDR4 3600MHz
+TeamGroup T-Force Delta 16GB DDR4 3600MHz
+Kingston Fury Renegade 32GB DDR4 4000MHz
+Patriot Viper Steel 16GB DDR4 4400MHz
+Corsair Dominator Platinum 32GB DDR5 5200MHz
+Kingston Fury Beast 32GB DDR5 5200MHz
+G.Skill Trident Z5 32GB DDR5 5600MHz
+Corsair Vengeance 32GB DDR5 5600MHz
+TeamGroup T-Force Vulcan 32GB DDR5 6000MHz
+G.Skill Flare X5 32GB DDR5 6000MHz
+Kingston Fury Renegade 32GB DDR5 6400MHz
+Corsair Dominator Titanium 48GB DDR5 6600MHz
+ADATA XPG Lancer 32GB DDR5 6000MHz
+Crucial Pro 32GB DDR5 5600MHz
+Patriot Viper Venom 32GB DDR5 6200MHz
+Kingston Fury Beast 64GB DDR5 6000MHz
+
+FONTES
+Corsair CV450 450W
+Corsair CV550 550W
+Corsair CX650 650W
+Corsair RM650x 650W
+Corsair RM750x 750W
+Corsair RM850x 850W
+Corsair HX1000i 1000W
+XPG Pylon 550W
+XPG Core Reactor 650W
+XPG Core Reactor 750W
+XPG Core Reactor 850W
+Seasonic Focus GX-650
+Seasonic Focus GX-750
+Seasonic Focus GX-850
+EVGA SuperNOVA 650 G5
+EVGA SuperNOVA 750 G6
+Cooler Master MWE 650 Bronze
+Cooler Master MWE 750 Gold
+Thermaltake Toughpower GF1 850W
+MSI MPG A850G 850W
+MSI MPG A1000G 1000W
+Gigabyte UD750GM 750W
+Gigabyte UD850GM 850W
+SilverStone DA850 Gold

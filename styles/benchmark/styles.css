@@ -1,0 +1,139 @@
+.benchmark-page {
+    align-items: stretch;
+}
+
+.benchmark-shell {
+    width: min(1180px, 94vw);
+    margin: 40px auto 48px;
+    position: relative;
+    z-index: 10;
+}
+
+.benchmark-hero {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.benchmark-hero h1 {
+    margin: 10px 0 12px;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--neon-cyan);
+    text-shadow: 4px 4px 0px var(--neon-purple), 0 0 20px var(--neon-cyan);
+}
+
+.benchmark-hero .eyebrow {
+    margin: 0;
+    color: var(--neon-pink);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.benchmark-hero .subtitle {
+    margin: 0;
+    color: #fff;
+    opacity: 0.88;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.benchmark-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 22px;
+}
+
+.benchmark-card {
+    background: rgba(5, 0, 15, 0.66);
+    border-top: 2px solid var(--neon-purple);
+    border-bottom: 2px solid var(--neon-purple);
+    box-shadow: inset 0 0 10px rgba(184, 41, 255, 0.12);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+}
+
+.benchmark-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.benchmark-card .card-header h2 {
+    margin: 0;
+    font-size: 12px;
+    color: var(--neon-cyan);
+}
+
+.benchmark-estimator label {
+    display: block;
+    margin-top: 12px;
+    font-size: 10px;
+    color: var(--neon-pink);
+}
+
+.benchmark-estimator select {
+    max-width: 100%;
+}
+
+.benchmark-estimator button {
+    margin-top: 16px;
+}
+
+.benchmark-result {
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    background: rgba(0, 0, 0, 0.28);
+    color: #fff;
+    line-height: 1.8;
+}
+
+.benchmark-summary .details-list {
+    display: grid;
+    gap: 10px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.benchmark-summary .detail-item {
+    display: grid;
+    gap: 5px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(184, 41, 255, 0.25);
+}
+
+.benchmark-summary .detail-label {
+    color: var(--neon-cyan);
+    font-size: 9px;
+}
+
+.benchmark-summary .details-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.benchmark-summary .details-list::-webkit-scrollbar-track {
+    background: #050010;
+}
+
+.benchmark-summary .details-list::-webkit-scrollbar-thumb {
+    background: var(--neon-purple);
+    border-radius: 10px;
+}
+
+.benchmark-summary .details-list::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-pink);
+}
+.benchmark-summary .detail-value {
+    color: #fff;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+@media (max-width: 980px) {
+    .benchmark-grid {
+        grid-template-columns: 1fr;
+    }
+}

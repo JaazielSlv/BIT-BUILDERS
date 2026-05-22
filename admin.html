@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - BIT-BUILDERS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body class="admin-page">
+    <header class="admin-topbar">
+        <h1>Painel Admin</h1>
+    </header>
+
+    <main class="admin-shell">
+        <!-- SEÇÃO DE LOGIN -->
+        <section id="login-section" class="admin-login-panel">
+            <h2>Autenticação Administrativa</h2>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Seu e-mail cadastrado">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Sua senha secreta">
+            </div>
+            <div id="login-feedback" class="login-feedback" style="display:none;"></div>
+            <button id="btn-login" class="btn-primary">Entrar no Painel</button>
+        </section>
+
+        <!-- SEÇÃO DO PAINEL -->
+        <section id="panel-section" class="hidden admin-panel-grid">
+            <div class="admin-header-row">
+                <h2>Administração do Site</h2>
+                <button id="btn-logout" class="btn-danger">Sair</button>
+            </div>
+
+            <!-- BOTÕES DE AÇÃO PRINCIPAIS -->
+            <div class="admin-actions-row">
+                <button id="btn-refresh" class="btn-ghost">Atualizar Lista</button>
+                <button id="btn-open-add" class="btn-primary">+ Adicionar Nova Peça</button>
+                <button id="btn-sync-images" class="btn-ghost">Sincronizar imagens</button>
+                <button id="btn-check-images" class="btn-ghost">Checar imagens</button>
+            </div>
+
+            <!-- FORMULÁRIO (OCULTO POR PADRÃO) -->
+            <div id="form-container" class="hidden admin-form-panel">
+                <div class="admin-form-head">
+                    <h3>Cadastro de Componente</h3>
+                    <button id="btn-close-form" class="btn-ghost">X Fechar</button>
+                </div>
+                
+                <div class="input-group">
+                    <select id="comp-categoria">
+                        <option value="processadores">Processador</option>
+                        <option value="placamae">Placa-Mãe</option>
+                        <option value="gpu">Placa de Vídeo</option>
+                        <option value="ram">Memória RAM</option>
+                        <option value="fonte">Fonte de Alimentação</option>
+                    </select>
+                </div>
+
+                <!-- Campos de Especificação Técnica para Compatibilidade -->
+                <div class="input-group" id="div-socket" style="display: block;">
+                    <label>Socket Compatível:</label>
+                    <input type="text" id="comp-socket" placeholder="Ex: AM4, AM5, LGA1700...">
+                </div>
+                
+                <div class="input-group" id="div-ram-type" style="display: none;">
+                    <label>Tecnologia RAM:</label>
+                    <select id="comp-ram-type">
+                        <option value="DDR3">DDR3</option>
+                        <option value="DDR4" selected>DDR4</option>
+                        <option value="DDR5">DDR5</option>
+                    </select>
+                </div>
+
+                <!-- Novos campos: Consumo e Potência -->
+                <div class="input-group" id="div-tdp" style="display: block;">
+                    <label>TDP / Consumo (Watts):</label>
+                    <input type="number" id="comp-tdp" placeholder="Ex: 65, 120, 300">
+                </div>
+
+                <div class="input-group" id="div-potencia" style="display: none;">
+                    <label>Potência Declarada da Fonte (Watts):</label>
+                    <input type="number" id="comp-potencia" placeholder="Ex: 500, 600, 850">
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="comp-nome" placeholder="Nome do Componente (ex: Ryzen 5 5600)">
+                </div>
+                <div class="input-group">
+                    <textarea id="comp-descricao" rows="4" placeholder="Descrição Técnica ou JSON..."></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Nome do Arquivo de Imagem (Precisa estar na pasta img/ no GitHub):</label><br>
+                    <input type="text" id="comp-imagem" placeholder="Ex: placa-mae-asus.png">
+                </div>
+                <button id="btn-add" class="btn-primary btn-full">Salvar no Banco de Dados</button>
+                <button id="btn-cancel-edit" class="hidden btn-danger btn-full">Cancelar Edição</button>
+            </div>
+
+            <!-- SEÇÃO DE LISTAGEM DE COMPONENTES -->
+            <div class="admin-list-panel">
+                <div class="admin-list-head">
+                    <h3>Inventário Geral</h3>
+                </div>
+                <div id="components-list" class="admin-list-content">
+                    <!-- A lista será renderizada aqui via JS, agrupada por categoria -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("btn-login");
+            const feedback = document.getElementById("login-feedback");
+
+            btn.addEventListener("click", () => {
+                if (!window.__adminModuleReady) {
+                    feedback.style.display = "block";
+                    feedback.textContent = "Falha ao carregar admin.js (cache/import). Use Ctrl+F5 e tente novamente.";
+                }
+            });
+        });
+    </script>
+
+    <!-- Script principal de formulários -->
+    <script type="module" src="./src/admin.js?v=20260526"></script>
+    
+    <!-- Script Tático temporário para Forçar Cadastro Rápido -->
+    <script type="module" src="./src/injetor.js?v=20260526"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+RELATORIO DE SINCRONIZACAO DAS IMAGENS
+
+Status geral:
+- Total de PNGs encontrados em img/: 17
+- PNGs que batem com o nome esperado do injetor: 2
+- PNGs com nome diferente do esperado: 15
+- PNGs faltando para cobrir todo o catalogo: muitos, pois a lista tem 128 pecas
+
+IMAGENS JA OK
+- amd-radeon-rx-6700-xt.png -> AMD Radeon RX 6700 XT
+- amd-radeon-rx-6900-xt.png -> AMD Radeon RX 6900 XT
+
+IMAGENS QUE PRECISAM RENOMEAR
+- asus-prime.png -> asus-prime-b550m-a.png
+- ASUS-ROG-Strix-Z690-E.png -> asus-rog-strix-z690-e.png
+- ASUS-TUF-Gaming-B450M-PLUS-II.png -> asus-tuf-gaming-b450m-plus-ii.png
+- Corsair-Vengeance-8GB-DDR3-1600MHz.png -> corsair-vengeance-8gb-ddr3-1600mhz.png
+- Corsair-Vengeance-LPX-32GB-DDR4-3600MHz.png -> corsair-vengeance-lpx-32gb-ddr4-3600mhz.png
+- G.Skill-Ripjaws-V-16GB-DDR4-3200MHz.png -> g-skill-ripjaws-v-16gb-ddr4-3200mhz.png
+- Gigabyte-B550-AORUS-PRO-AC.png -> gigabyte-b550-aorus-pro-ac.png
+- i5-10400F.png -> intel-core-i5-10400f.png
+- i7-12700K.png -> intel-core-i7-12700k.png
+- Kingston-Fury-Beast-32GB-DDR5-5200MHz.png -> kingston-fury-beast-32gb-ddr5-5200mhz.png
+- MSI-MAG-B460M-Mortar.png -> msi-mag-b460m-mortar.png
+- NVIDIA-GeForce-GTX-1660-Super.png -> nvidia-geforce-gtx-1660-super.png
+- NVIDIA-GeForce-RTX 3060-Ti.png -> nvidia-geforce-rtx-3060-ti.png
+- Ryzen5-3600.png -> amd-ryzen-5-3600.png
+- Ryzen7-5800X.png -> amd-ryzen-7-5800x.png
+
+OBSERVACOES IMPORTANTES
+- O injetor esta procurando nomes em minusculo e com hifens, no padrao slug.
+- O arquivo com espaco no nome "NVIDIA-GeForce-RTX 3060-Ti.png" vai falhar no GitHub Pages se nao for renomeado.
+- Para sincronizar de verdade, os arquivos em img/ precisam seguir exatamente o slug esperado.
+
+EXEMPLOS DE NOMES ESPERADOS PELO INJETOR
+- Intel Core i5-10400F -> intel-core-i5-10400f.png
+- ASUS TUF Gaming B450M-PLUS II -> asus-tuf-gaming-b450m-plus-ii.png
+- Corsair CV550 550W -> corsair-cv550-550w.png
+- XPG Core Reactor 850W -> xpg-core-reactor-850w.png
