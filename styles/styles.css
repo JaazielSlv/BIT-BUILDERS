@@ -680,3 +680,22 @@ body:not(.admin-page) #login-section, body:not(.admin-page) #panel-section {
     background: #ff0055;
 }
 
+
+.back-link-admin {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    color: var(--neon-pink);
+    text-decoration: none;
+    font-size: 10px;
+    border: 1px solid var(--neon-pink);
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    transition: all 0.3s;
+}
+.back-link-admin:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-pink);
+}

@@ -305,10 +305,10 @@ async function loadComponentsList() {
                 
                 // Ação de Apagar
                 div.querySelector(".btn-delete").addEventListener("click", async () => {
-                    if (confirm(`Atenção: Tem certeza que deseja apagar ${item.nome}?`)) {
+                    showConfirm(`Atenção: Tem certeza que deseja apagar ${item.nome}?`, async () => {
                         await deleteDoc(doc(db, item.col, item.id));
                         loadComponentsList();
-                    }
+                    });
                 });
 
                 // Ação de Editar
@@ -371,4 +371,49 @@ function showToast(message, type = 'info') {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
     }, 4000);
+}
+
+// Função de Confirm Customizado
+function showConfirm(message, onConfirm) {
+    let overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0'; overlay.style.left = '0';
+    overlay.style.width = '100vw'; overlay.style.height = '100vh';
+    overlay.style.background = 'rgba(0,0,0,0.8)';
+    overlay.style.zIndex = '10000';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center';
+    
+    let box = document.createElement('div');
+    box.style.background = 'var(--bg-color, #0b001a)';
+    box.style.border = '2px solid #ff0055';
+    box.style.padding = '20px';
+    box.style.color = '#fff';
+    box.style.textAlign = 'center';
+    box.style.boxShadow = '0 0 15px #ff0055';
+    
+    let msg = document.createElement('p');
+    msg.innerText = message;
+    msg.style.marginBottom = '20px';
+    msg.style.fontSize = '12px';
+    box.appendChild(msg);
+    
+    let btnRow = document.createElement('div');
+    btnRow.style.display = 'flex'; btnRow.style.gap = '10px'; btnRow.style.justifyContent = 'center';
+    
+    let btnYes = document.createElement('button');
+    btnYes.innerText = 'Sim, apagar';
+    btnYes.className = 'btn-danger';
+    btnYes.onclick = () => { onConfirm(); overlay.remove(); };
+    
+    let btnNo = document.createElement('button');
+    btnNo.innerText = 'Cancelar';
+    btnNo.className = 'btn-ghost';
+    btnNo.onclick = () => { overlay.remove(); };
+    
+    btnRow.appendChild(btnYes);
+    btnRow.appendChild(btnNo);
+    box.appendChild(btnRow);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
 }

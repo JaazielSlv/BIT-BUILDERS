@@ -36,8 +36,18 @@ async function loadComponents() {
             selectEl.appendChild(option);
         });
 
-        // Adiciona evento de mudança para atualizar a imagem
-        selectEl.addEventListener("change", (e) => updateImage(col, e.target.value));
+        // Adiciona evento de mudança para atualizar a imagem e salvar sessão
+        selectEl.addEventListener("change", (e) => {
+            sessionStorage.setItem(`escolha_${col}`, e.target.value);
+            updateImage(col, e.target.value);
+        });
+
+        // Restaura escolha salva (se houver) ao carregar a página
+        const savedChoice = sessionStorage.getItem(`escolha_${col}`);
+        if (savedChoice && dadosMemoria[col][savedChoice]) {
+            selectEl.value = savedChoice;
+            updateImage(col, savedChoice);
+        }
     }
 }
 
@@ -56,10 +66,10 @@ window.updateImage = function(tipo, docId) {
         imgEl.style.cursor = "pointer";
         imgEl.title = "Abrir ficha técnica";
 
-        // Prepara página de detalhes dinâmicos em nova aba
+        // Prepara página de detalhes dinâmicos na mesma aba
         linkEl.href = `ficha_tecnica.html?tipo=${tipo}&id=${docId}`;
         linkEl.style.display = "block";
-        imgEl.onclick = () => window.open(linkEl.href, "_blank", "noopener,noreferrer");
+        imgEl.onclick = () => window.location.href = linkEl.href;
     } else {
         imgEl.style.display = "none";
         linkEl.style.display = "none";
