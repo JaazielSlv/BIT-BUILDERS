@@ -118,7 +118,7 @@ async function hydrateBuild() {
     const payloadBuild = decodeBuildPayload();
     if (payloadBuild?.processador && payloadBuild?.placaMae && payloadBuild?.gpu && payloadBuild?.ram && payloadBuild?.fonte) {
         if (subtitleEl) {
-            subtitleEl.textContent = "A montagem foi validada na página inicial e os detalhes abaixo foram recebidos diretamente da validação.";
+            subtitleEl.textContent = "A estimação de FPS abaixo foi gerada com base em calculos Tecnicos dos componentes.";
         }
 
         if (statusEl) {
