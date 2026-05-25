@@ -1,11 +1,12 @@
 import { db, auth } from "./firebase-config.js?v=20260526";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 window.__adminModuleReady = true;
 
 const loginSection = document.getElementById("login-section");
 const panelSection = document.getElementById("panel-section");
+const userPanelSection = document.getElementById("user-panel-section");
 const formContainer = document.getElementById("form-container");
 const loginFeedback = document.getElementById("login-feedback");
 
@@ -58,7 +59,104 @@ document.getElementById("password").addEventListener("keypress", function(event)
     }
 });
 
-// Sistema de Login
+// Sistema de Login e Registro
+const registerBtn = document.getElementById("btn-register");
+if (registerBtn) {
+    registerBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value.trim();
+        const pass = document.getElementById("password").value;
+        const btn = document.getElementById("btn-register");
+        
+        if(!email || !pass) {
+            setLoginFeedback("Preencha e-mail e senha para criar conta.");
+            return;
+        }
+
+        btn.innerText = "Criando...";
+        btn.disabled = true;
+        setLoginFeedback("Conectando...", "ok");
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+            // Salva papel default (user)
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                email: email,
+                role: "user"
+            });
+            btn.innerText = "Sucesso!";
+            setLoginFeedback("Conta criada com sucesso!", "ok");
+        } catch (error) {
+            setLoginFeedback("Erro: " + error.code);
+            btn.innerText = "Criar Conta";
+            btn.disabled = false;
+        }
+    });
+}
+
+const logoutUserBtn = document.getElementById("btn-user-logout");
+if (logoutUserBtn) {
+    logoutUserBtn.addEventListener("click", async () => {
+        await signOut(auth);
+    });
+}
+
+// Carregar Configurações do Usuário
+async function loadSavedConfigs(userId) {
+    const listEl = document.getElementById("saved-configs-list");
+    listEl.innerHTML = "<p>Carregando...</p>";
+    try {
+        const snapshot = await getDocs(collection(db, `users/${userId}/configs`));
+        if (snapshot.empty) {
+            listEl.innerHTML = "<p style='color:#00f0ff;'>Você ainda não salvou nenhuma configuração.</p>";
+            return;
+        }
+        listEl.innerHTML = "";
+        snapshot.forEach(docSnap => {
+            const cfg = docSnap.data();
+            const div = document.createElement("div");
+            div.className = "admin-item";
+            div.style.flexDirection = "column";
+            div.style.alignItems = "flex-start";
+            
+            // Formatando a data
+            const currDate = cfg.data ? new Date(cfg.data).toLocaleString() : "Data Desconhecida";
+            
+            div.innerHTML = `
+                <div style="width: 100%; border-bottom: 1px solid #7700ff; padding-bottom: 5px; margin-bottom: 5px; color: #f9f9f9; font-size: 14px;">
+                   <strong>Configuração salva em:</strong> ${currDate}
+                </div>
+                <div style="font-size: 12px; color: #ffb8d1; line-height: 1.6;">
+                    CPU: ${cfg.processadores || 'N/A'}<br>
+                    Placa-Mãe: ${cfg.placamae || 'N/A'}<br>
+                    GPU: ${cfg.gpu || 'N/A'}<br>
+                    RAM: ${cfg.ram || 'N/A'}<br>
+                    Fonte: ${cfg.fonte || 'N/A'}
+                </div>
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <a href="benchmark.html?build=${cfg.buildDataStr}&game=cyberpunk&res=1080&saved=true" class="btn-primary" style="text-decoration: none; display: inline-block; padding: 5px 10px; font-size: 12px; background: #00adb5; color: #000; box-shadow: 0 0 10px #00adb5; border: 1px solid #00f0ff;">Ver Montagem</a>
+                    <button class="btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="deleteConfig('${userId}', '${docSnap.id}')">Excluir</button>
+                </div>
+            `;
+            listEl.appendChild(div);
+        });
+    } catch(err) {
+        console.error(err);
+        listEl.innerHTML = "<p style='color:red;'>Erro ao ler configurações.</p>";
+    }
+}
+
+window.deleteConfig = function(userId, configId) {
+    showConfirm("Tem certeza que quer remover esta configuração salva?", async () => {
+        try {
+            await deleteDoc(doc(db, `users/${userId}/configs`, configId));
+            loadSavedConfigs(userId);
+        } catch(err) {
+            alert("Erro ao excluir!");
+        }
+    });
+}
+
 document.getElementById("btn-login").addEventListener("click", async (e) => {
     e.preventDefault(); // Impede qualquer comportamento padrão
     const btn = document.getElementById("btn-login");
@@ -96,15 +194,28 @@ document.getElementById("btn-logout").addEventListener("click", async () => {
 });
 
 // Verifica estado do login para mostrar/esconder painel
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         loginSection.classList.add("hidden");
-        panelSection.classList.remove("hidden");
         setLoginFeedback("Sessão autenticada.", "ok");
-        loadComponentsList(); // Carrega a lista ao logar
+        
+        // Verifica papel do usuario
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists() && userDoc.data().role === "admin") {
+            panelSection.classList.remove("hidden");
+            if (userPanelSection) userPanelSection.classList.add("hidden");
+            loadComponentsList(); // Carrega a lista ao logar
+        } else {
+            panelSection.classList.add("hidden");
+            if (userPanelSection) {
+                userPanelSection.classList.remove("hidden");
+                loadSavedConfigs(user.uid);
+            }
+        }
     } else {
         loginSection.classList.remove("hidden");
         panelSection.classList.add("hidden");
+        if (userPanelSection) userPanelSection.classList.add("hidden");
     }
 });
 
@@ -416,4 +527,44 @@ function showConfirm(message, onConfirm) {
     box.appendChild(btnRow);
     overlay.appendChild(box);
     document.body.appendChild(overlay);
+}
+
+// Toggle de senha
+const togglePassword = document.getElementById("toggle-password");
+if (togglePassword) {
+    togglePassword.addEventListener("click", () => {
+        const passField = document.getElementById("password");
+        if (passField.type === "password") {
+            passField.type = "text";
+            togglePassword.innerText = "🙈";
+        } else {
+            passField.type = "password";
+            togglePassword.innerText = "👁️";
+        }
+    });
+}
+
+// Toggle View Configs para Admin
+const btnViewConfigs = document.getElementById("btn-view-configs");
+if (btnViewConfigs) {
+    btnViewConfigs.addEventListener("click", () => {
+        panelSection.classList.add("hidden");
+        userPanelSection.classList.remove("hidden");
+        // O botão voltar (Sair no user painel) ja fará o auth state changed e recarregará na proxima atualização.
+        // Vamos dar bypass para que o admin sinta-se em casa:
+        userPanelSection.querySelector("h2").innerText = "Gerenciar Minhas Configurações (Admin)";
+        const logoutUserBtn2 = document.getElementById("btn-user-logout");
+        logoutUserBtn2.innerText = "Voltar ao Inventário";
+        
+        // Remove old event listener from btn-user-logout
+        const newLogout = logoutUserBtn2.cloneNode(true);
+        logoutUserBtn2.parentNode.replaceChild(newLogout, logoutUserBtn2);
+        
+        newLogout.addEventListener("click", () => {
+            userPanelSection.classList.add("hidden");
+            panelSection.classList.remove("hidden");
+        });
+        
+        loadSavedConfigs(auth.currentUser.uid);
+    });
 }

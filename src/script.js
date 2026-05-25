@@ -1,5 +1,6 @@
-import { db } from "./firebase-config.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { db, auth } from "./firebase-config.js?v=20260526";
+import { collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { estimateSingle } from "./benchmark/estimator.js";
 
 // Normalização de nomes para corresponder ao padrão usado pelo injetor
@@ -220,3 +221,14 @@ function showToast(message, type = 'info') {
         setTimeout(() => toast.remove(), 300);
     }, 4000);
 }
+
+let currentUser = null;
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    const linkLogin = document.getElementById("link-login");
+    if (user) {
+        linkLogin.innerText = "Minha Conta";
+    } else {
+        linkLogin.innerText = "Acesso / Perfil";
+    }
+});

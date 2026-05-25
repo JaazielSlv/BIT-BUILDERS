@@ -1,6 +1,14 @@
-import { db } from "../firebase-config.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { db, auth } from "../firebase-config.js";
+import { doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { estimateSingle } from "./estimator.js";
+
+let currentUser = null;
+if (auth) {
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+    });
+}
 
 const fieldLabels = {
     nome: "Nome",
@@ -232,7 +240,7 @@ async function hydrateBuild() {
 function initEstimator(build) {
     const resSelect = document.getElementById("resSelect");
     const gameSelect = document.getElementById("gameSelect");
-    const calcBtn = document.getElementById("calcBtn");
+    const saveBtn = document.getElementById("saveBtn");
     const output = document.getElementById("output");
 
     if (!build?.gpu || !build?.processador || !build?.ram || !build?.placaMae) {
@@ -264,7 +272,42 @@ function initEstimator(build) {
         }
     };
 
-    calcBtn?.addEventListener("click", recalc);
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("saved") === "true") {
+        saveBtn.style.display = "none";
+    }
+
+    saveBtn?.addEventListener("click", async () => {
+        if (!currentUser) {
+            alert("Você precisa fazer login no seu perfil/conta antes de salvar configurações!");
+            return;
+        }
+
+        saveBtn.innerText = "Salvando...";
+        saveBtn.disabled = true;
+
+        const configData = {
+            processadores: build.processador.nome,
+            placamae: build.placaMae.nome,
+            gpu: build.gpu.nome,
+            ram: build.ram.nome,
+            fonte: build.fonte ? build.fonte.nome : "Desconhecida",
+            buildDataStr: btoa(unescape(encodeURIComponent(JSON.stringify(build)))), // Para poder restaurar depis
+            data: new Date().toISOString()
+        };
+
+        try {
+            await addDoc(collection(db, `users/${currentUser.uid}/configs`), configData);
+            saveBtn.innerText = "SUCESSO! SALVO NO PERFIL";
+            saveBtn.style.background = "#00ff00";
+            saveBtn.style.color = "#000";
+        } catch (err) {
+            console.error(err);
+            saveBtn.innerText = "Erro ao salvar!";
+            saveBtn.disabled = false;
+        }
+    });
+
     resSelect?.addEventListener("change", recalc);
     gameSelect?.addEventListener("change", recalc);
     recalc();

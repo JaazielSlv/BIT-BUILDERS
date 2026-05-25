@@ -7,6 +7,8 @@ BIT-BUILDERS é uma aplicação web completa para montar e verificar a compatibi
 - **Selecionador de Componentes:** Escolha do Processador, Placa-Mãe, Placa de Vídeo, Memória RAM e Fonte de Alimentação.
 - **Validador de Compatibilidade:** Simula a conexão entre as peças (Socket CPU x Placa-Mãe, DDR4 vs DDR5) e balanço de força (consumo estimado/TDP do sistema vs Potência da Fonte).
 - **Estimador de FPS (Benchmark):** A partir da construção validada, realiza cálculos para estimar o FPS do sistema caso estivesse rodando jogos famosos em resoluções como 1080p, 1440p e 4K.
+- **Contas de Usuário (Acesso & Perfis):** Agora os clientes do site podem se cadastrar e logar para ter uma *"Garagem Virtual"*, salvando suas configurações preferidas (Múltiplas Builds) na nuvem sob sigilo direto no seu próprio painel.
+- **Segurança de Acesso Firebase:** Proteção back-end (via Firestore Rules) garantindo que Edições, Exclusões de Peças Globais e afins só possam ser executadas pelo Painel se o usuário for oficialmente detentor do nível `"role: admin"`. Ninguém sem ser `Admin` apaga o site!
 - **Auto-injeção Baseada em Imagem:** Carrega dinamicamente a arquitetura ou as peças se o banco estiver vazio. Identifica automaticamente as peças disponíveis (Processador, GPU, etc.) pela leitura da pasta `/img` e lança tudo como Lote (Batch) pro Firebase sem esgorar quotas, criando Fichas Técnicas para cada um automaticamente com base no nome do arquivo.
 - **Painel Admin:** Interface simples (`admin.html`) para gerenciamento e sincronismo da Base.
 - **Ficha Técnica Interativa:** Clicar na imagem dos componentes em *index.html* lança a sua ficha visual baseada no Firestore.

@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin - BIT-BUILDERS</title>
+    <title>Minha Conta - BIT-BUILDERS</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body class="admin-page">
     <a href="index.html" class="back-link-admin">VOLTAR AO PC BUILDER</a>
     <header class="admin-topbar">
-        <h1>Painel Admin</h1>
+        <h1>Acesso ao Sistema</h1>
     </header>
 
     <main class="admin-shell">
         <!-- SEÇÃO DE LOGIN -->
         <section id="login-section" class="admin-login-panel">
-            <h2>Autenticação Administrativa</h2>
+            <h2>Autenticação de Usuário</h2>
             <div class="input-group">
                 <input type="email" id="email" placeholder="Seu e-mail cadastrado">
             </div>
-            <div class="input-group">
-                <input type="password" id="password" placeholder="Sua senha secreta">
+            <div class="input-group" style="position: relative;">
+                <input type="password" id="password" placeholder="Sua senha secreta" style="padding-right: 40px; width: 100%; box-sizing: border-box;">
+                <span id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #00f0ff; font-size: 16px;">👁️</span>
             </div>
             <div id="login-feedback" class="login-feedback" style="display:none;"></div>
-            <button id="btn-login" class="btn-primary">Entrar no Painel</button>
+            <div style="display: flex; gap: 10px;">
+                <button id="btn-login" class="btn-primary" style="flex:1;">Entrar</button>
+                <button id="btn-register" class="btn-ghost" style="flex:1;">Criar Conta</button>
+            </div>
         </section>
 
-        <!-- SEÇÃO DO PAINEL -->
+        <!-- SEÇÃO DO PAINEL ADMIN -->
         <section id="panel-section" class="hidden admin-panel-grid">
             <div class="admin-header-row">
                 <h2>Administração do Site</h2>
@@ -38,6 +42,7 @@
             <div class="admin-actions-row">
                 <button id="btn-refresh" class="btn-ghost">Atualizar Lista</button>
                 <button id="btn-open-add" class="btn-primary">+ Adicionar Nova Peça</button>
+                <button id="btn-view-configs" class="btn-primary" style="background:#00adb5; color:#000; box-shadow: 0 0 10px #00adb5;">Ver MinhasConfigs</button>
             </div>
 
             <!-- FORMULÁRIO (OCULTO POR PADRÃO) -->
@@ -104,6 +109,19 @@
                 </div>
                 <div id="components-list" class="admin-list-content">
                     <!-- A lista será renderizada aqui via JS, agrupada por categoria -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DO PAINEL DO USUÁRIO (PARA CONFIGURAÇÕES SALVAS) -->
+        <section id="user-panel-section" class="hidden admin-panel-grid">
+            <div class="admin-header-row">
+                <h2>Minhas Configurações Salvas</h2>
+                <button id="btn-user-logout" class="btn-danger">Sair</button>
+            </div>
+            <div class="admin-list-panel">
+                <div id="saved-configs-list" class="admin-list-content">
+                    <p style="color:#aaa;">Carregando...</p>
                 </div>
             </div>
         </section>
