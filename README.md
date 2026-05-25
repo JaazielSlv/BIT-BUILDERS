@@ -1,4 +1,27 @@
-# BIT-BUILDERS 🖥️
+# BIT-BUILDERS
+
+BIT-BUILDERS é uma aplicação web completa para montar e verificar a compatibilidade de componentes de um computador (PC Builder), operando em conjunto com o Firebase Firestore para leitura de banco de dados e avaliação técnica de peças.
+
+## 🚀 Funcionalidades
+
+- **Selecionador de Componentes:** Escolha do Processador, Placa-Mãe, Placa de Vídeo, Memória RAM e Fonte de Alimentação.
+- **Validador de Compatibilidade:** Simula a conexão entre as peças (Socket CPU x Placa-Mãe, DDR4 vs DDR5) e balanço de força (consumo estimado/TDP do sistema vs Potência da Fonte).
+- **Estimador de FPS (Benchmark):** A partir da construção validada, realiza cálculos para estimar o FPS do sistema caso estivesse rodando jogos famosos em resoluções como 1080p, 1440p e 4K.
+- **Auto-injeção Baseada em Imagem:** Carrega dinamicamente a arquitetura ou as peças se o banco estiver vazio. Identifica automaticamente as peças disponíveis (Processador, GPU, etc.) pela leitura da pasta `/img` e lança tudo como Lote (Batch) pro Firebase sem esgorar quotas, criando Fichas Técnicas para cada um automaticamente com base no nome do arquivo.
+- **Painel Admin:** Interface simples (`admin.html`) para gerenciamento e sincronismo da Base.
+- **Ficha Técnica Interativa:** Clicar na imagem dos componentes em *index.html* lança a sua ficha visual baseada no Firestore.
+
+## 📁 Estrutura de Diretórios
+
+- **Raiz HTMLs** (`index.html`, `admin.html`, `ficha_tecnica.html`, `benchmark.html`) Interface visual.
+- **/src/script.js**: Motor principal da simulação do hardware + auto-início quando Firestore estiver limpo.
+- **/src/firebase-config.js**: Conexão com Google.
+- **/src/injetor.js**: Extrator inteligente e alimentador ultra-rápido de Lote no Banco de Dados para os arquivos da pasta `/img`.
+- **/src/benchmark/estimator.js**: A inteligência artificial estática por trás da detecção de frames em cyberpuk/cs/etc...
+- **/img/**: Seu repositório de recursos visuais de hardware que guiam o sistema na hora da listagem.
+
+## ⚙️ Uso
+Abra o projeto através de um servidor local (ex: _Live Server_ no VS Code), nunca pelo sistema de arquivo do Windows (`file:///...`), para evitar problemas com ESModules. As peças já estão todas cadastradas com base nos seus arquivos da pasta `img`. Caso precise adicionar peças, coloque a foto nova (.png, .jpg) na pasta base `img` e chame a limpeza/injeção novamente pelo Painel de Admin ou Console! 🖥️
 
 ## Descrição
 

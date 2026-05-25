@@ -20,7 +20,7 @@ async function loadComponents() {
     for (const col of collections) {
         const selectEl = document.getElementById(col);
         const querySnapshot = await getDocs(collection(db, col));
-        
+
         // Limpar select
         selectEl.innerHTML = `<option value="">Selecione uma opção...</option>`;
         
@@ -91,7 +91,7 @@ document.getElementById("btn-check").addEventListener("click", () => {
     resultTitle.style.display = "none";
 
     if (!p || !m || !g || !r || !f) {
-        alert("Por favor, selecione todas as 5 peças para testar (inclusive a fonte)!");
+        showToast("Por favor, selecione todas as 5 peças para testar (inclusive a fonte)!", "error");
         return;
     }
 
@@ -187,3 +187,26 @@ document.getElementById("btn-check").addEventListener("click", () => {
 
 // Inicialização
 window.addEventListener("DOMContentLoaded", loadComponents);
+// Função de Toast Estilizado
+function showToast(message, type = 'info') {
+    let container = document.getElementById('cyber-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'cyber-toast-container';
+        container.className = 'cyber-toast-container';
+        document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `cyber-toast ${type}`;
+    toast.innerText = message;
+    container.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Animate out
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}

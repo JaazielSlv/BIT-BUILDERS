@@ -21,10 +21,13 @@ html, body {
 
 body {
     font-family: 'Press Start 2P', cursive;
-    background:
-        radial-gradient(circle at top, rgba(0, 240, 255, 0.12), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(255, 43, 214, 0.12), transparent 25%),
-        linear-gradient(135deg, #06000e 0%, #0b0314 55%, #020106 100%);
+    background-color: var(--bg);
+    background-image: 
+        linear-gradient(rgba(5, 0, 13, 0.85), rgba(5, 0, 13, 0.85)),
+        url('../../img/background.gif');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     color: var(--text);
     padding: 24px;
 }

@@ -12,35 +12,38 @@ const gameProfiles = {
 };
 
 const gpuTiers = [
-  { match: /RTX 4090/, score: 10.0 },
-  { match: /RTX 4080|RX 7900 XTX/, score: 9.1 },
-  { match: /RTX 4070 Ti|RTX 4070|RX 7900 XT|RX 7800 XT/, score: 8.0 },
-  { match: /RTX 4060 Ti|RX 7700 XT|RX 6800 XT|RX 6900 XT|RX 6950 XT/, score: 7.2 },
-  { match: /RTX 4060|RX 6800|RX 6750 XT/, score: 6.4 },
-  { match: /RTX 3080 Ti|RTX 3080|RTX 3070 Ti|RTX 3070|RX 6700 XT/, score: 5.7 },
-  { match: /RTX 3090|RTX 3060 Ti|RX 6650 XT/, score: 5.2 },
-  { match: /RTX 3060|RTX 2060 Super|RX 6600 XT|RX 6600/, score: 4.5 },
-  { match: /RTX 2060|RTX 2070 Super|GTX 1660 Super|GTX 1660|GTX 1650/, score: 3.4 },
-  { match: /RX 6700 XT|RX 6800 XT|RX 6900 XT|RX 7800 XT|RX 7900 XT|RX 7900 XTX/, score: 7.5 }
+  { match: /RTX 4090/i, score: 10.0 },
+  { match: /RTX 4080|RX 7900 XTX/i, score: 9.1 },
+  { match: /RTX 4070 Ti|RTX 4070|RX 7900 XT|RX 7800 XT/i, score: 8.0 },
+  { match: /RTX 4060 Ti|RX 7700 XT|RX 6800 XT|RX 6900 XT|RX 6950 XT/i, score: 7.2 },
+  { match: /RTX 4060|RX 6800|RX 6750 XT/i, score: 6.4 },
+  { match: /RTX 3080 Ti|RTX 3080|RTX 3070 Ti|RTX 3070|RX 6700 XT/i, score: 5.7 },
+  { match: /RTX 3090|RTX 3060 Ti|RX 6650 XT/i, score: 5.2 },
+  { match: /RTX 3060|RTX 2060 Super|RX 6600 XT|RX 6600/i, score: 4.5 },
+  { match: /RTX 2060|RTX 2070 Super|GTX 1660 Super|GTX 1660|GTX 1650/i, score: 3.4 },
+  { match: /RX 6700 XT|RX 6800 XT|RX 6900 XT|RX 7800 XT|RX 7900 XT|RX 7900 XTX/i, score: 7.5 }
 ];
 
 const cpuTiers = [
-  { match: /i9-14900K|i9-13900K|i9-12900K|i9-11900K|i9-10900K|Ryzen 9 7950X|Ryzen 9 7900X|Ryzen 9 5950X|Ryzen 9 5900X/, score: 10.0 },
-  { match: /i7-13700K|i7-12700K|i7-11700K|i7-10700K|Ryzen 7 7800X3D|Ryzen 7 7700X|Ryzen 7 5800X|Ryzen 7 5700X/, score: 8.9 },
-  { match: /i5-14600K|i5-13400F|i5-12400F|i5-11400F|i5-10400F|Ryzen 5 7600X|Ryzen 5 7600|Ryzen 5 5600X|Ryzen 5 5600|Ryzen 5 3600/, score: 7.8 },
-  { match: /i3-10105F/, score: 5.8 }
+  { match: /i9-14900K|i9-13900K|i9-12900K|i9-11900K|i9-10900K|Ryzen 9 7950X|Ryzen 9 7900X|Ryzen 9 5950X|Ryzen 9 5900X/i, score: 10.0 },
+  { match: /i7-13700K|i7-12700K|i7-11700K|i7-10700K|Ryzen 7 7800X3D|Ryzen 7 7700X|Ryzen 7 5800X|Ryzen 7 5700X/i, score: 8.9 },
+  { match: /i5-14600K|i5-13400F|i5-12400F|i5-11400F|i5-10400F|Ryzen 5 7600X|Ryzen 5 7600|Ryzen 5 5600X|Ryzen 5 5600|Ryzen 5 3600/i, score: 7.8 },
+  { match: /i3-10105F/i, score: 5.8 },
+  { match: /14900|13900|12900|7950|7900/i, score: 10.0 },
+  { match: /13700|12700|11700|10700|7700|5800|5700/i, score: 8.9 },
+  { match: /14600|13400|12400|10400|7600|5600|3600/i, score: 7.8 }
 ];
 
 const boardFactorByChipset = [
-  { match: /Z790|Z690|X670E|X670/, score: 1.05 },
-  { match: /B760|B650|B550|Z590|B560/, score: 1.0 },
-  { match: /B460|B450/, score: 0.96 }
+  { match: /Z790|Z690|X670E|X670/i, score: 1.05 },
+  { match: /B760|B650|B550|Z590|B560/i, score: 1.0 },
+  { match: /B460|B450/i, score: 0.96 }
 ];
 
 const ramFactorByType = [
-  { match: /DDR5/, score: 1.06 },
-  { match: /DDR4/, score: 1.0 },
-  { match: /DDR3/, score: 0.9 }
+  { match: /DDR5/i, score: 1.06 },
+  { match: /DDR4/i, score: 1.0 },
+  { match: /DDR3/i, score: 0.9 }
 ];
 
 const gpuOverrides = {

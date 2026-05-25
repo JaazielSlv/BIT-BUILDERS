@@ -625,3 +625,58 @@ body:not(.admin-page) #login-section, body:not(.admin-page) #panel-section {
     color: #000;
     box-shadow: 0 0 20px #ff0055;
 }
+
+/* Estilos para o Cyber Toast (Popup de Mensagem) */
+.cyber-toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.cyber-toast {
+    background: rgba(15, 2, 30, 0.95);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 10px;
+    border-radius: 4px;
+    text-shadow: 1px 1px 2px #000;
+    max-width: 300px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    pointer-events: auto;
+}
+
+.cyber-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.cyber-toast.error {
+    border-color: #ff0055;
+    box-shadow: 0 0 10px #ff0055, inset 0 0 10px #ff0055;
+}
+
+.cyber-toast::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--neon-cyan);
+}
+
+.cyber-toast.error::before {
+    background: #ff0055;
+}
+

@@ -135,175 +135,6 @@ document.getElementById("comp-categoria").addEventListener("change", (e) => {
     }
 });
 
-    // Função utilitária para normalizar nomes em arquivos de imagem
-    const toImageFile = (nome) =>
-        nome
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-zA-Z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "")
-            .toLowerCase();
-
-    const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "svg", "gif"];
-    const IMAGE_STOP_WORDS = new Set([
-        "pesquisa", "google", "kabum", "brasil", "br",
-        "placa", "placas", "video", "mae", "series", "kit",
-        "memory", "memoria", "fonte", "alimentacao", "gamer",
-        "gaming", "desktop", "processor", "processador", "cpu",
-        "graphics", "card", "premium", "black", "white", "red", "blue",
-        "pc", "produto", "products", "overview"
-    ]);
-
-    function normalizeText(value) {
-        return String(value || "")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-zA-Z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "")
-            .toLowerCase();
-    }
-
-    function expandToken(token) {
-        const variants = [token];
-        if (/\d+[a-z]+$/i.test(token)) {
-            variants.push(token.replace(/[a-z]+$/i, ""));
-        }
-        return variants;
-    }
-
-    function tokenize(value) {
-        const result = [];
-        for (const token of normalizeText(value).split("-").filter(Boolean)) {
-            if (IMAGE_STOP_WORDS.has(token)) continue;
-            for (const variant of expandToken(token)) {
-                if (variant && !IMAGE_STOP_WORDS.has(variant) && !result.includes(variant)) {
-                    result.push(variant);
-                }
-            }
-        }
-        return result;
-    }
-
-    async function imageExists(url) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = encodeURI(url);
-        });
-    }
-
-    function scoreImageMatch(componentName, sourceName, mappedName) {
-        const componentTokens = new Set(tokenize(componentName));
-        const sourceTokens = tokenize(sourceName);
-        const mappedTokens = tokenize(mappedName);
-        const componentBase = normalizeText(componentName);
-        const sourceBase = normalizeText(sourceName);
-        const mappedBase = normalizeText(mappedName);
-
-        let score = 0;
-        for (const token of sourceTokens) {
-            if (componentTokens.has(token)) score += 2;
-        }
-        for (const token of mappedTokens) {
-            if (componentTokens.has(token)) score += 1;
-        }
-
-        if (
-            mappedBase.startsWith(componentBase) ||
-            componentBase.startsWith(mappedBase) ||
-            sourceBase.startsWith(componentBase) ||
-            componentBase.startsWith(sourceBase)
-        ) {
-            score += 2;
-        }
-
-        return score;
-    }
-
-    async function resolveImageUrl(nome, map = {}, currentUrl = "") {
-        const exactName = String(nome || "").trim();
-        const normalizedName = normalizeText(exactName);
-        const candidates = [];
-
-        const pushCandidates = (baseName) => {
-            if (!baseName) return;
-            for (const ext of IMAGE_EXTENSIONS) {
-                candidates.push(`./img/${baseName}.${ext}`);
-            }
-        };
-
-        if (currentUrl) {
-            candidates.push(currentUrl);
-        }
-
-        pushCandidates(exactName);
-        pushCandidates(normalizedName);
-
-        for (const [sourceName, mappedName] of Object.entries(map)) {
-            const score = scoreImageMatch(exactName, sourceName, mappedName);
-            if (score >= 4) {
-                pushCandidates(mappedName);
-            }
-        }
-
-        for (const candidate of [...new Set(candidates.filter(Boolean))]) {
-            // eslint-disable-next-line no-await-in-loop
-            if (await imageExists(candidate)) {
-                return candidate;
-            }
-        }
-
-        return "";
-    }
-
-    document.getElementById("btn-sync-images").addEventListener("click", async () => {
-        if (!confirm('Executar sincronização de imagens para todos os documentos? Isso atualizará o campo imagemUrl no Firestore.')) return;
-
-        const statusEl = document.createElement('div');
-        statusEl.style.padding = '10px';
-        statusEl.style.marginTop = '8px';
-        statusEl.style.border = '1px solid rgba(0,240,255,0.1)';
-        statusEl.style.background = 'rgba(0,0,0,0.4)';
-        document.querySelector('.admin-actions-row').appendChild(statusEl);
-
-        // tenta carregar image-map.json para ajudar na resolução
-        let map = {};
-        try {
-            const resp = await fetch('./img/image-map.json');
-            if (resp.ok) map = await resp.json();
-        } catch (err) {
-            console.warn('image-map.json não encontrado ou não pode ser lido', err);
-        }
-
-        const colecoes = ['processadores','placamae','gpu','ram','fonte'];
-        let updated = 0;
-        for (const col of colecoes) {
-            const querySnapshot = await getDocs(collection(db, col));
-            for (const docSnap of querySnapshot.docs) {
-                const data = docSnap.data();
-                const nome = data.nome || '';
-                const candidate = await resolveImageUrl(nome || docSnap.id, map, data.imagemUrl || '');
-
-                if (candidate) {
-                    const newUrl = candidate;
-                    if ((data.imagemUrl || '').trim() !== newUrl) {
-                        try {
-                            // eslint-disable-next-line no-await-in-loop
-                            await updateDoc(doc(db, col, docSnap.id), { imagemUrl: newUrl });
-                            updated++;
-                            statusEl.innerText = `Atualizando ${col}/${docSnap.id} -> ${newUrl} (${updated} atualizações)`;
-                        } catch (err) {
-                            console.error('Erro atualizando doc', col, docSnap.id, err);
-                        }
-                    }
-                }
-            }
-        }
-
-        statusEl.innerText = `Sincronização concluída. ${updated} documentos atualizados.`;
-        setTimeout(() => statusEl.remove(), 8000);
-    });
 
 // Adicionar componente
 document.getElementById("btn-add").addEventListener("click", async () => {
@@ -323,7 +154,7 @@ document.getElementById("btn-add").addEventListener("click", async () => {
     const potencia = parseInt(document.getElementById("comp-potencia").value) || 0;
 
     if(!nome || !fileName) {
-        alert("Nome e arquivo de imagem são obrigatórios!");
+        showToast("Nome e arquivo de imagem são obrigatórios!", "error");
         btn.disabled = false;
         btn.innerText = editMode ? "Atualizar Componente" : "Salvar no Banco de Dados";
         return;
@@ -359,13 +190,13 @@ document.getElementById("btn-add").addEventListener("click", async () => {
         if (editMode) {
             // Atualiza componente existente
             await updateDoc(doc(db, editCollection, editDocId), produtoData);
-            alert("Componente atualizado com sucesso!");
+            showToast("Componente atualizado com sucesso!", "info");
             cancelEditMode();
         } else {
             // Salva novo componente
             produtoData.data_criacao = new Date();
             await addDoc(collection(db, categoria), produtoData);
-            alert("Componente salvo com sucesso!");
+            showToast("Componente salvo com sucesso!", "info");
 
             // Limpar campos
             document.getElementById("comp-nome").value = "";
@@ -376,98 +207,11 @@ document.getElementById("btn-add").addEventListener("click", async () => {
 
         loadComponentsList(); // Atualizar a lista visual
     } catch (err) {
-        alert("Erro ao salvar: " + err.message);
+        showToast("Erro ao salvar: " + err.message, "error");
     } finally {
         btn.disabled = false;
         btn.innerText = editMode ? "Atualizar Componente" : "Salvar no Banco de Dados";
     }
-});
-
-document.getElementById('btn-check-images').addEventListener('click', async () => {
-    const reportEl = document.createElement('div');
-    reportEl.style.padding = '12px';
-    reportEl.style.marginTop = '8px';
-    reportEl.style.maxHeight = '50vh';
-    reportEl.style.overflow = 'auto';
-    reportEl.style.border = '1px solid rgba(0,240,255,0.08)';
-    reportEl.style.background = '#08020f';
-    document.querySelector('.admin-actions-row').appendChild(reportEl);
-
-    reportEl.innerText = 'Coletando documentos...';
-
-    let map = {};
-    try {
-        const resp = await fetch('./img/image-map.json');
-        if (resp.ok) map = await resp.json();
-    } catch (err) {
-        console.warn('image-map.json não disponível', err);
-    }
-
-    const colecoes = ['processadores','placamae','gpu','ram','fonte'];
-    const missing = [];
-    const ok = [];
-
-    for (const col of colecoes) {
-        reportEl.innerText = `Checando coleção ${col}...`;
-        const snapshot = await getDocs(collection(db, col));
-        for (const docSnap of snapshot.docs) {
-            const data = docSnap.data();
-            const nome = data.nome || docSnap.id;
-            const imagemUrl = (data.imagemUrl || '').trim();
-
-            let exists = false;
-            if (imagemUrl) {
-                exists = await imageExists(imagemUrl);
-            }
-
-            if (!exists) {
-                const candidate = await resolveImageUrl(nome || docSnap.id, map, imagemUrl);
-
-                missing.push({ col, id: docSnap.id, nome, imagemUrl: imagemUrl || null, candidate });
-            } else {
-                ok.push({ col, id: docSnap.id, nome, imagemUrl });
-            }
-        }
-    }
-
-    reportEl.innerHTML = '';
-    const h1 = document.createElement('h4');
-    h1.style.marginTop = '0';
-    h1.textContent = `Relatório de Imagens — ${missing.length} faltando, ${ok.length} OK`;
-    reportEl.appendChild(h1);
-
-    if (missing.length > 0) {
-        const ul = document.createElement('ul');
-        ul.style.margin = '8px 0';
-        for (const it of missing) {
-            const li = document.createElement('li');
-            li.style.marginBottom = '6px';
-            li.innerHTML = `<strong>${it.nome}</strong> (<em>${it.col}/${it.id}</em>) — imagem atual: ${it.imagemUrl || '<i>vazio</i>'} ${it.candidate ? ` — candidato: <code>${it.candidate}</code>` : ''}`;
-            ul.appendChild(li);
-        }
-        reportEl.appendChild(ul);
-    }
-
-    if (ok.length > 0) {
-        const details = document.createElement('details');
-        const summary = document.createElement('summary');
-        summary.textContent = `${ok.length} documentos com imagem disponível (clique para ver)`;
-        details.appendChild(summary);
-        const ol = document.createElement('ol');
-        for (const it of ok) {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${it.nome}</strong> — <code>${it.imagemUrl}</code>`;
-            ol.appendChild(li);
-        }
-        details.appendChild(ol);
-        reportEl.appendChild(details);
-    }
-
-    const note = document.createElement('div');
-    note.style.marginTop = '8px';
-    note.style.opacity = '0.9';
-    note.innerHTML = 'Observação: este diagnóstico roda no navegador autenticado; para atualizar os campos use "Sincronizar imagens".';
-    reportEl.appendChild(note);
 });
 
 // Cancelar Edição (Resetar Form)
@@ -604,4 +348,27 @@ async function loadComponentsList() {
     if (isEmpty) {
         listEl.innerHTML = "<p style='color: #ff0055;'>Inventário está vazio.</p>";
     }
+}
+// Função de Toast Estilizado
+function showToast(message, type = 'info') {
+    let container = document.getElementById('cyber-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'cyber-toast-container';
+        container.className = 'cyber-toast-container';
+        document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `cyber-toast ${type}`;
+    toast.innerText = message;
+    container.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Animate out
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
 }
